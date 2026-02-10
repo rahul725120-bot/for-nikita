@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Just For Nikita 💖</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .teddy {
+      position: absolute;
+      font-size: 2.8rem;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+      100% { transform: translateY(0); }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 28px;
+      box-shadow: 0 25px 50px rgba(255, 105, 180, 0.3);
+      max-width: 430px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff69b4;
+      margin-bottom: 15px;
+    }
+
+    #question {
+      font-size: 1.2rem;
+      color: #444;
+      min-height: 70px;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: none;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff69b4, #ff85c2);
+      border: none;
+      color: white;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #nextBtn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Teddies -->
+  <div class="teddy" style="top: 8%; left: 12%;">🧸</div>
+  <div class="teddy" style="top: 70%; left: 8%;">🧸</div>
+  <div class="teddy" style="top: 15%; left: 80%;">🧸</div>
+  <div class="teddy" style="top: 75%; left: 75%;">🧸</div>
+
+  <div class="card">
+    <h1>Hey Nikita 💕</h1>
+
+    <div id="question">
+      I made something small but special… just for you 🥺💖
+    </div>
+
+    <div class="buttons" id="choiceButtons">
+      <button onclick="answer()">Yes 😊</button>
+      <button onclick="answer()">Obviously 😌</button>
+    </div>
+
+    <button id="nextBtn" onclick="nextQuestion()">Tap Gently 💗</button>
+  </div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b1f1a7b58.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const questions = [
+      "Do you know you have one of the prettiest smiles? 🌸",
+      "Be honest… do soft pink things make you feel cozy? 🎀",
+      "If I gave you a teddy today, would you keep it? 🧸",
+      "Do you like when someone remembers tiny details about you? 🥺",
+      "Random question… but you do light up rooms, you know that? ✨",
+      "Would you smile if you knew this page was made only for you? 💖",
+      "Okay last one… should I make you smile again sometime? 🌷"
+    ];
+
+    let index = 0;
+
+    function nextQuestion() {
+      document.getElementById("question").innerText = questions[index];
+      document.getElementById("choiceButtons").style.display = "flex";
+      index++;
+
+      if (index >= questions.length) {
+        document.getElementById("nextBtn").style.display = "none";
+      }
+    }
+
+    function answer() {
+      document.getElementById("question").innerText =
+        "That smile right now? Yeah… that was the goal 💕🧸";
+      document.getElementById("choiceButtons").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
