@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💙</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #a8d8ea, #fbc2eb);
+    overflow: hidden;
+}
+
+/* Floating Elements */
+.floating {
+    position: absolute;
+    font-size: 20px;
+    animation: float 10s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Main Container */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    color: #333;
+    animation: fadeIn 1.5s ease;
+}
+
+/* Text */
+h1 {
+    font-size: 22px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 80px;
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #333;
+    color: white;
+}
+
+/* Fade */
+.fade {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.show {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translate(-50%, -40%);}
+    to {opacity: 1; transform: translate(-50%, -50%);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Emojis -->
+<script>
+const emojis = ["💖","🌸","🧸","💙","✨"];
+for(let i=0;i<20;i++){
+    let el = document.createElement("div");
+    el.className = "floating";
+    el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (6 + Math.random()*6) + "s";
+    el.style.fontSize = (16 + Math.random()*20) + "px";
+    document.body.appendChild(el);
+}
+</script>
+
+<div class="container">
+    <h1>Hey Nikita… 💗</h1>
+    <p id="text"></p>
+    <button id="btn" onclick="nextSlide()">Continue 💙</button>
+</div>
+
+<script>
+const slides = [
+`Before you click anything…
+
+This is not a question…
+and there is nothing you need to answer…
+
+I just made this…
+because you are someone special to me 🌸`,
+
+`So just sit back…
+and read this slowly 😊`,
+
+`How are you feeling right now? 🌙
+
+(Whatever it is… it’s okay 💛)`,
+
+`You don’t always have to be strong 💫`,
+
+`Even if you don’t say it…
+I notice when something is off 🌙`,
+
+`And maybe I don’t always say perfect things…
+but my intentions for you are always real 💖`,
+
+`You overthink sometimes 😏
+…but it’s kinda cute too 💛`,
+
+`I don’t know if you realize this…
+
+But your presence is calming…
+your smile feels genuine…
+and your vibe is rare ✨`,
+
+`Not everyone has that…`,
+
+`I didn’t make this to impress you…`,
+
+`I made this so you remember…
+
+that someone sees you,
+appreciates you,
+and quietly cares about you 💖`,
+
+`No expectations…
+no pressure…
+
+Just… stay the way you are 🌸`
+];
+
+let index = 0;
+const text = document.getElementById("text");
+
+function showSlide() {
+    text.classList.remove("show");
+    setTimeout(() => {
+        text.innerHTML = slides[index];
+        text.classList.add("show");
+    }, 500);
+}
+
+function nextSlide() {
+    index++;
+    if(index < slides.length){
+        showSlide();
+    } else {
+        index = 0;
+        showSlide();
+    }
+}
+
+// AUTO TIMING (6 sec each slide)
+setInterval(() => {
+    if(index < slides.length - 1){
+        index++;
+        showSlide();
+    }
+}, 6000);
+
+// init
+showSlide();
+</script>
+
+</body>
+</html>
