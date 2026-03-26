@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💙</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #a8d8ea, #fbc2eb);
+    overflow: hidden;
+}
+
+/* Floating emojis */
+.floating {
+    position: absolute;
+    animation: float 10s linear infinite;
+    opacity: 0.7;
+}
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Container */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: #333;
+}
+
+/* Text */
+h1 { font-size: 22px; }
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 100px;
+}
+
+/* Buttons */
+button {
+    margin: 8px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+button:hover {
+    background: #333;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating -->
+<script>
+const emojis = ["💖","🌸","🧸","✨"];
+for(let i=0;i<25;i++){
+    let el = document.createElement("div");
+    el.className = "floating";
+    el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.fontSize = (16 + Math.random()*20) + "px";
+    el.style.animationDuration = (6 + Math.random()*6) + "s";
+    document.body.appendChild(el);
+}
+</script>
+
+<div class="container">
+    <h1>Hey Nikita… 💗</h1>
+    <p id="text"></p>
+    <div id="buttons"></div>
+</div>
+
+<script>
+const textEl = document.getElementById("text");
+const btnEl = document.getElementById("buttons");
+
+function typeText(message, callback){
+    textEl.innerHTML = "";
+    btnEl.innerHTML = "";
+    let i = 0;
+
+    function type(){
+        if(i < message.length){
+            textEl.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(type, 25);
+        } else if(callback){
+            callback();
+        }
+    }
+    type();
+}
+
+/* STEP 1 */
+function start(){
+    typeText(
+`Before you click anything…
+
+This is not a question…
+and there is nothing you need to answer…
+
+I made this because you are someone special to me 🌸`,
+    ()=>{
+        btnEl.innerHTML = `<button onclick="next1()">Continue 💙</button>`;
+    });
+}
+
+/* STEP 2 */
+function next1(){
+    typeText(
+`So just sit back…
+and read this slowly 😊`,
+    ()=>{
+        btnEl.innerHTML = `<button onclick="feeling()">Continue 🌙</button>`;
+    });
+}
+
+/* QUESTION */
+function feeling(){
+    typeText("How are you feeling right now? 🌙", ()=>{
+        btnEl.innerHTML = `
+            <button onclick="happy()">😊 Happy</button>
+            <button onclick="sad()">😔 Sad</button>
+            <button onclick="confused()">😶 Confused</button>
+        `;
+    });
+}
+
+function happy(){
+    typeText("I’m really glad 😊… stay like this always 💛", nextCommon);
+}
+function sad(){
+    typeText("I wish I could fix it… but I’m here 💙", nextCommon);
+}
+function confused(){
+    typeText("It’s okay… you don’t have to figure everything out 🌙", nextCommon);
+}
+
+function nextCommon(){
+    btnEl.innerHTML = `<button onclick="gentle1()">Continue 💫</button>`;
+}
+
+/* MESSAGES */
+function gentle1(){
+    typeText("You don’t always have to be strong 💫", ()=>{
+        btnEl.innerHTML = `<button onclick="gentle2()">Continue ➜</button>`;
+    });
+}
+
+function gentle2(){
+    typeText("Even if you don’t say it… I notice when something is off 🌙", ()=>{
+        btnEl.innerHTML = `<button onclick="gentle3()">Continue ➜</button>`;
+    });
+}
+
+function gentle3(){
+    typeText("Maybe I don’t always say perfect things… but my intentions are always real 💖", ()=>{
+        btnEl.innerHTML = `<button onclick="tease()">Continue 😌</button>`;
+    });
+}
+
+/* TEASE */
+function tease(){
+    typeText("You overthink sometimes 😏", ()=>{
+        btnEl.innerHTML = `
+            <button onclick="yesThink()">Yes 😌</button>
+            <button onclick="noThink()">No 😏</button>
+        `;
+    });
+}
+
+function yesThink(){
+    typeText("I know 😌… that’s why I want you to relax more 💛", final1);
+}
+function noThink(){
+    typeText("You just proved it 😏… but it’s cute 💖", final1);
+}
+
+/* FINAL */
+function final1(){
+    btnEl.innerHTML = `<button onclick="final2()">Continue 💫</button>`;
+}
+
+function final2(){
+    typeText(
+`Your presence is calming…
+your smile feels genuine…
+and your vibe is rare ✨`,
+    ()=>{
+        btnEl.innerHTML = `<button onclick="final3()">Continue 💙</button>`;
+    });
+}
+
+function final3(){
+    typeText(
+`I didn’t make this to impress you…
+
+I made this so you remember…
+
+that someone sees you,
+appreciates you,
+and quietly cares about you 💖`,
+    ()=>{
+        btnEl.innerHTML = `<button onclick="restart()">Read Again 💙</button>`;
+    });
+}
+
+function restart(){
+    start();
+}
+
+start();
+</script>
+
+</body>
+</html>
